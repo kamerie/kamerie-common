@@ -26,4 +26,5 @@ def setup_logging(
     else:
         logging.basicConfig(level=default_level)
 
+    logging.getLogger('plugin')
     return logging
