@@ -1,9 +1,7 @@
 import json
 import os
-
 import pika
-from utilities import setup_logging
-
+from kamerie.utilities.utilities import setup_logging
 from kamerie.utilities.consts import EXCHANGE_NAME
 
 
