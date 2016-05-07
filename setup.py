@@ -4,7 +4,7 @@ setup(
     name='kamerie_common',
     version='0.1',
     author='Chen Asraf & Dor Munis',
-    url='https://github.com/kamerie/kamerie-common',
+    url='https://github.com/kamerie/kamerie_common',
     packages=find_packages(exclude=["*.tests", "*.tests.*", "tests.*", "tests"]),
     platforms='any',
     license='Apache 2.0',
