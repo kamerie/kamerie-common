@@ -8,7 +8,7 @@ setup(
     packages=find_packages(exclude=["*.tests", "*.tests.*", "tests.*", "tests"]),
     platforms='any',
     license='Apache 2.0',
-    install_requires=['pika'],
+    install_requires=['pika', 'pymongo'],
     zip_safe=False,
     classifiers=[
         'Programming Language :: Python',
