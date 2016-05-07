@@ -1,12 +1,10 @@
 import json
-import logging
+import os
 
 import pika
 
 from consts import EXCHANGE_NAME
-
-with open('logging.json') as f:
-    LOGGING_CONFIG = json.load(f)
+from utilities import setup_logging
 
 
 class TemplatePlugin(object):
@@ -14,9 +12,9 @@ class TemplatePlugin(object):
         # Prepare instance
         self.name = plugin_name
 
-        logging.basicConfig(**LOGGING_CONFIG)
-        self._logger = logging.getLogger(__name__)
-        self._logger.info("Initialized dispatcher")
+        custom_logging = setup_logging(os.getcwd())
+        self._logger = custom_logging.getLogger('plugin')
+        self._logger.info("Initialized", plugin_name)
 
         # Connect to rabbitmq queue
         self._connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))

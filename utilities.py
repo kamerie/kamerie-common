@@ -5,11 +5,17 @@ import os
 
 
 def setup_logging(
-        default_path='logging.json',
+        path,
+        default_file='logging.json',
         default_level=logging.INFO,
         env_key='LOG_CFG'
 ):
-    path = default_path
+    # check if logs dir exists, if not, create it
+    log_path = os.path.join(path, 'logs')
+    if not os.path.exists(log_path):
+        os.makedirs(log_path)
+
+    path = os.path.join(path, default_file)
     value = os.getenv(env_key, None)
 
     path = value if value else path
@@ -19,3 +25,5 @@ def setup_logging(
         logging.config.dictConfig(config)
     else:
         logging.basicConfig(level=default_level)
+
+    return logging

@@ -41,6 +41,11 @@
             "level": "ERROR",
             "handlers": ["console"],
             "propagate": "no"
+        },
+        "plugin": {
+            "level": "ERROR",
+            "handlers": ["console"],
+            "propagate": "no"
         }
     },
 
