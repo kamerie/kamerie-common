@@ -5,6 +5,7 @@ setup(
     version='0.1',
     author='Chen Asraf & Dor Munis',
     url='https://github.com/kamerie/kamerie_common',
+    package_data={'kamerie': ['template/*', 'utilities/*']},
     packages=find_packages(exclude=["*.tests", "*.tests.*", "tests.*", "tests"]),
     platforms='any',
     license='Apache 2.0',
