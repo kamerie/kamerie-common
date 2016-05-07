@@ -12,7 +12,7 @@ class TemplatePlugin(object):
 
         custom_logging = setup_logging(os.getcwd())
         self._logger = custom_logging.getLogger('plugin')
-        self._logger.info("Initialized", plugin_name)
+        self._logger.info("Initialized %s", plugin_name)
 
         # Connect to rabbitmq queue
         self._connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
