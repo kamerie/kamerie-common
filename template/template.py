@@ -3,8 +3,8 @@ import os
 
 import pika
 
-from consts import EXCHANGE_NAME
 from utilities import setup_logging
+from utilities.consts import EXCHANGE_NAME
 
 
 class TemplatePlugin(object):

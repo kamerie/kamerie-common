@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='kamerie-common',
+    name='kamerie_common',
     version='0.1',
     author='Chen Asraf & Dor Munis',
     url='https://github.com/kamerie/kamerie-common',
