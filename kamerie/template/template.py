@@ -1,8 +1,9 @@
 import json
-import os
+
 import pika
-from kamerie.utilities.utilities import setup_logging
+
 from kamerie.utilities.consts import EXCHANGE_NAME
+from kamerie.utilities.utilities import get_logger
 
 
 class TemplatePlugin(object):
@@ -10,9 +11,8 @@ class TemplatePlugin(object):
         # Prepare instance
         self.name = plugin_name
 
-        custom_logging = setup_logging(os.getcwd())
-        self._logger = custom_logging.getLogger('plugin')
-        self._logger.info("Initialized", plugin_name)
+        self._logger = get_logger(plugin_name)
+        self._logger.info("Initialized " + plugin_name)
 
         # Connect to rabbitmq queue
         self._connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
@@ -32,7 +32,7 @@ class TemplatePlugin(object):
 
     def _message_received(self, channel, method, properties, message):
         message = json.loads(message)
-        if self.name not in message.get('plugins', []):
+        if self.name not in message.get('kamerie_plugins', []):
             self.on_message(message)
 
     def on_message(self, message):
