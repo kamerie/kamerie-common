@@ -45,3 +45,24 @@ def get_logger(name='plugin'):
     _setup_logging(name)
     logging.getLogger(name).info('Successfully initialized logger. Created log files in ~/.kamerie/logs')
     return logging.getLogger(name)
+
+
+def list_plugins_from_repo(source):
+    # from pkg_resources import resource_listdir as listdir
+    # from pkg_resources import resource_isdir as isdir
+    from os.path import isdir, join
+    from os import listdir
+    return filter(lambda p: isdir(join(source, p)) and p[0].isalnum(), listdir(source))
+
+
+def get_plugin_requirements(plugin_path):
+    from os.path import join, exists
+
+    requirements_file = join(plugin_path, 'requirements.txt')
+    libraries = []
+
+    if exists(requirements_file):
+        with open(requirements_file, 'r') as f:
+            libraries += f.readlines()
+
+    return list(set(libraries))
