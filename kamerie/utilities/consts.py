@@ -9,6 +9,10 @@ EXCHANGE_NAME = 'kamerie-distribute'
 TYPE_MOVIE = 'movie'
 TYPE_SERIES = 'series'
 TYPE_KEYS = [TYPE_SERIES, TYPE_MOVIE]
+MEDIA_FILE_EXTENSIONS = ('.avi', '.mpg', '.mkv', '.mp4', '.m4p', \
+                         '.flv', '.f4v', '.f4p', '.f4a', '.f4b', \
+                         '.vob', '.ogv', '.ogg', '.mov', '.qt', \
+                         '.3gp')
 
 # Library
 LIBRARY_PATH = 'library_path'
