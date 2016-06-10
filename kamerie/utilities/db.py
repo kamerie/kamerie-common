@@ -1,4 +1,5 @@
 from pymongo import MongoClient
+from pymongo.results import InsertOneResult, InsertManyResult
 from bson.objectid import ObjectId
 import re
 
@@ -29,6 +30,10 @@ def query_by_id(item):
 
     if str(item) == item:
         return {'_id': ObjectId(item)}
+
+    if isinstance(item, InsertOneResult):
+        return {'_id': item.inserted_id}
+
     if '_id' in item:
         if isinstance(item['_id'], ObjectId):
             return {'_id': item['_id']}

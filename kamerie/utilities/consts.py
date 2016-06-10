@@ -1,7 +1,6 @@
 import os
 
 # MQ
-
 DISPATCHER_NAME = 'dispatcher'
 EXCHANGE_NAME = 'kamerie-distribute'
 
