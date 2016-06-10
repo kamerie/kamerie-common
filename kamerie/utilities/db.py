@@ -24,6 +24,7 @@ def attrs_to_db_set(attributes):
 
     return setter
 
+
 def query_by_id(item):
     if hasattr(item, 'db_info') and item.db_info is not None:
         item = item.db_info

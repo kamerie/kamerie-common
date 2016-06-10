@@ -33,3 +33,5 @@ KAMERIE_LOGS_DIR = os.path.join(KAMERIE_CONFIG_DIR, 'logs')
 KAMERIE_PID_DIR = os.path.join(KAMERIE_CONFIG_DIR, 'pid')
 DEFAULT_MAIN_MODULE = 'plugin.py'
 DEFAULT_MAIN_CLASS = 'TemplatePlugin'
+PACKAGE_JSON = 'package.json'
+
