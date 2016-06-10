@@ -1,18 +1,18 @@
 import json
+import os
 
 import pika
 
-from kamerie.utilities.consts import EXCHANGE_NAME
+from kamerie.utilities.consts import EXCHANGE_NAME, PACKAGE_JSON
 from kamerie.utilities.utilities import get_logger
 
 
 class TemplatePlugin(object):
-    def __init__(self, plugin_name):
+    def __init__(self, plugin_name, path=None):
         # Prepare instance
         self.name = plugin_name
-
-        self._logger = get_logger(plugin_name)
-        self._logger.info("Initialized " + plugin_name)
+        self.path = os.getcwd() if not path else path
+        self._load_credentials()
 
         # Connect to rabbitmq queue
         self._connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
@@ -22,6 +22,19 @@ class TemplatePlugin(object):
         self._channel.queue_bind(queue=self.name, exchange=EXCHANGE_NAME, routing_key='')
         if self._logger:
             self._logger.info("Established %s's MQ connection" % self.name)
+
+    def _load_credentials(self):
+        package_json_path = os.path.join(self.path, PACKAGE_JSON) if not os.path.exists(PACKAGE_JSON) else PACKAGE_JSON
+        if os.path.exists(package_json_path):
+            with open(package_json_path) as f:
+                package_info = json.load(f)
+
+            self.__dict__.update(package_info)
+            self._logger = get_logger(self.name)
+            self._logger.info("Initializing {name}...".format(name=self.name))
+            self._logger.info(json.dumps(package_info))
+        else:
+            self._logger.warning('no package file was found')
 
     def start(self):
         if self._logger:
