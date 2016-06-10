@@ -15,21 +15,11 @@
             "stream": "ext://sys.stdout"
         },
 
-        "info_file_handler": {
+        "file_handler": {
             "class": "logging.handlers.RotatingFileHandler",
             "level": "INFO",
             "formatter": "simple",
-            "filename": "{path}/info/info-{timestamp}.log",
-            "maxBytes": 10485760,
-            "backupCount": 20,
-            "encoding": "utf8"
-        },
-
-        "error_file_handler": {
-            "class": "logging.handlers.RotatingFileHandler",
-            "level": "ERROR",
-            "formatter": "simple",
-            "filename": "{path}/errors/error-{timestamp}.log",
+            "filename": "{path}/{name}-{timestamp}.log",
             "maxBytes": 10485760,
             "backupCount": 20,
             "encoding": "utf8"
@@ -51,6 +41,6 @@
 
     "root": {
         "level": "INFO",
-        "handlers": ["console", "info_file_handler", "error_file_handler"]
+        "handlers": ["console", "file_handler"]
     }
 }
