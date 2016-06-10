@@ -12,12 +12,8 @@ def _setup_logging(name, default_file='logging.json', default_level=logging.INFO
     # create logs directory (if not exists)
     logs_path = os.path.join(KAMERIE_LOGS_DIR, name)
 
-    errors_log_path = os.path.join(logs_path, 'errors')
-    info_log_path = os.path.join(logs_path, 'info')
-
-    if not os.path.exists(errors_log_path) or not os.path.exists(info_log_path):
-        os.makedirs(errors_log_path)
-        os.makedirs(info_log_path)
+    if not os.path.exists(logs_path) or not os.path.exists(logs_path):
+        os.makedirs(logs_path)
 
     path = pkg_resources.resource_filename(__name__, default_file)
 
@@ -25,8 +21,7 @@ def _setup_logging(name, default_file='logging.json', default_level=logging.INFO
         with open(path, 'rt') as f:
             config = json.load(f)
 
-        _setup_logger_files(config, 'error_file_handler', name)
-        _setup_logger_files(config, 'info_file_handler', name)
+        _setup_logger_files(config, 'file_handler', name)
 
         logging.config.dictConfig(config)
     else:
@@ -36,6 +31,7 @@ def _setup_logging(name, default_file='logging.json', default_level=logging.INFO
 def _setup_logger_files(config, handler, name):
     if config.get('handlers', {}).get(handler, {}).get('filename', None):
         config['handlers'][handler]['filename'] = config['handlers'][handler]['filename'].format(
+            name=name,
             path=os.path.join(KAMERIE_LOGS_DIR, name),
             timestamp='{:%Y-%m-%dT%H-%M-%S}'.format(datetime.now())
         )

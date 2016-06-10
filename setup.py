@@ -9,7 +9,7 @@ setup(
     packages=find_packages(exclude=["*.tests", "*.tests.*", "tests.*", "tests"]),
     platforms='any',
     license='Apache 2.0',
-    install_requires=['pika', 'pymongo'],
+    install_requires=['pika', 'pymongo', 'psutil'],
     zip_safe=False,
     classifiers=[
         'Programming Language :: Python',
