@@ -35,3 +35,16 @@ DEFAULT_MAIN_MODULE = 'plugin.py'
 DEFAULT_MAIN_CLASS = 'TemplatePlugin'
 PACKAGE_JSON = 'package.json'
 
+# Media RegEx patterns
+def regex_from_file(file_name, separator="\n"):
+    with open(os.path.join(os.path.dirname(__file__), file_name), 'r') as f:
+        lines = f.read().split("\n")
+        patterns = ["(" + line.lower() + ")" for line in lines]
+        return '|'.join(patterns)
+
+SEASON_EP_PATTERN = r's?([0-9]+)[ex]([0-9]+)'
+CLEANUP_PATTERN = r'^\W+|\W+$|((19|20)[0-9]{2})'
+PUNC_TO_SPACE_PATTERN = r'(?!\w{2,})(\.+)'
+YEAR_PATTERN = r'((19|20)[0-9]{2})'
+QUALITY_PATTERN = r'([0-9]{3,4}p)'
+RELEASE_MEDIUM_PATTERN = regex_from_file('movie_types.txt')

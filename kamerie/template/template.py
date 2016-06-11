@@ -25,13 +25,14 @@ class TemplatePlugin(object):
 
     def _load_credentials(self):
         package_json_path = os.path.join(self.path, PACKAGE_JSON) if not os.path.exists(PACKAGE_JSON) else PACKAGE_JSON
+        self._logger = get_logger(self.name)
+        self._logger.info("Initializing {name}...".format(name=self.name))
+
         if os.path.exists(package_json_path):
             with open(package_json_path) as f:
                 package_info = json.load(f)
 
             self.__dict__.update(package_info)
-            self._logger = get_logger(self.name)
-            self._logger.info("Initializing {name}...".format(name=self.name))
             self._logger.info(json.dumps(package_info))
         else:
             self._logger.warning('no package file was found')
